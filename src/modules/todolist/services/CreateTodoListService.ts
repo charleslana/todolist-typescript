@@ -6,7 +6,7 @@ class CreateTodoListService {
     public async execute({title, completed}: CreateTodoListInterface): Promise<Object> {
 
         const todoListRepository = new TodoListRepository();
-        const randomId = Math.floor(Math.random() * 999);
+        const randomId = Math.random().toString(36).substring(2);
 
         return await todoListRepository.save({
             id: randomId,

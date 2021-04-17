@@ -19,6 +19,12 @@ class TodoListRepository {
     public async findAll(): Promise<Array<EntityTodoListInterface>> {
         return todoList;
     }
+
+    public async findById(id: string): Promise<Object | undefined> {
+
+        const findTodoList = todoList.filter(todo => todo.id.includes(id));
+        return findTodoList[0];
+    }
 }
 
 export default TodoListRepository;

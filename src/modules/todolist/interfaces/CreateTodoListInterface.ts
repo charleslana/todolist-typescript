@@ -1,4 +1,4 @@
 export default interface CreateTodoListInterface {
-    title: string,
-    completed: boolean
+    title: string;
+    completed: boolean;
 }

@@ -1,5 +1,5 @@
 export default interface EntityTodoListInterface {
-    id: number,
-    title: string,
-    completed: boolean
+    id: string;
+    title: string;
+    completed: boolean;
 }
