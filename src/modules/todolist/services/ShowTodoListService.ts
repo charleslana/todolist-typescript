@@ -1,4 +1,5 @@
 import TodoListRepository from '../repositories/TodoListRepository';
+import AppError from '../../../error/AppError';
 
 class ShowTodoListService {
 
@@ -8,11 +9,7 @@ class ShowTodoListService {
         const findTodoList = await todoListRepository.findById(id);
 
         if (!findTodoList) {
-            return {
-                statusCode: 400,
-                status: 'error',
-                message: 'Todo list not found.'
-            }
+            throw new AppError('Todo list not found.');
         }
 
         return findTodoList;

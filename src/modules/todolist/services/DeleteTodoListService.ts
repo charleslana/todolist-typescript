@@ -1,4 +1,5 @@
 import TodoListRepository from '../repositories/TodoListRepository';
+import AppError from '../../../error/AppError';
 
 class DeleteTodoListService {
 
@@ -8,11 +9,7 @@ class DeleteTodoListService {
         const todoList = await todoListRepository.findById(id);
 
         if (!todoList) {
-            return {
-                statusCode: 400,
-                status: 'error',
-                message: 'Todo list not found.'
-            }
+            throw new AppError('Todo list not found.');
         }
 
         await todoListRepository.deleteById(id);

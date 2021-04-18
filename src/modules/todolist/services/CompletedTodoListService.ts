@@ -1,6 +1,7 @@
 import TodoListRepository from '../repositories/TodoListRepository';
 import CompletedTodoListInterface from '../interfaces/CompletedTodoListInterface';
 import EntityTodoListInterface from '../interfaces/EntityTodoListInterface';
+import AppError from "../../../error/AppError";
 
 class CompletedTodoListService {
 
@@ -10,11 +11,7 @@ class CompletedTodoListService {
         const todoList = await todoListRepository.findById(id) as EntityTodoListInterface;
 
         if (!todoList) {
-            return {
-                statusCode: 400,
-                status: 'error',
-                message: 'Todo list not found.'
-            }
+            throw new AppError('Todo list not found.');
         }
 
         return await todoListRepository.saveById({

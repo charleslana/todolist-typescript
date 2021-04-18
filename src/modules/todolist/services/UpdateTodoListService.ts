@@ -1,5 +1,6 @@
 import EntityTodoListInterface from '../interfaces/EntityTodoListInterface';
 import TodoListRepository from '../repositories/TodoListRepository';
+import AppError from '../../../error/AppError';
 
 class UpdateTodoListService {
 
@@ -9,11 +10,7 @@ class UpdateTodoListService {
         const todoList = await todoListRepository.findById(id);
 
         if (!todoList) {
-            return {
-                statusCode: 400,
-                status: 'error',
-                message: 'Todo list not found.'
-            }
+            throw new AppError('Todo list not found.');
         }
 
         return await todoListRepository.saveById({

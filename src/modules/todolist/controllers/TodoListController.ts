@@ -38,7 +38,7 @@ class TodoListController {
 
         const todoList = await showTodoListService.execute(request.params.id) as StatusInterface;
 
-        return response.status(todoList.statusCode ? todoList.statusCode : 200).json(todoList);
+        return response.status(200).json(todoList);
     }
 
     public async update(request: Request, response: Response): Promise<Object> {
@@ -51,7 +51,7 @@ class TodoListController {
             completed: request.body.completed
         }) as StatusInterface;
 
-        return response.status(todoList.statusCode ? todoList.statusCode : 200).json(todoList);
+        return response.status(200).json(todoList);
     }
 
     public async delete(request: Request, response: Response): Promise<Object> {
@@ -74,7 +74,7 @@ class TodoListController {
             completed: enable
         }) as StatusInterface;
 
-        return response.status(todoList.statusCode ? todoList.statusCode : 200).json(todoList);
+        return response.status(200).json(todoList);
     }
 }
 
