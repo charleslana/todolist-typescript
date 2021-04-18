@@ -36,7 +36,7 @@ class TodoListController {
 
         const showTodoListService = new ShowTodoListService();
 
-        const todoList = await showTodoListService.execute(request.params.id) as StatusInterface;
+        const todoList = await showTodoListService.execute(request.params.id);
 
         return response.status(200).json(todoList);
     }
@@ -49,7 +49,7 @@ class TodoListController {
             id: request.body.id,
             title: request.body.title,
             completed: request.body.completed
-        }) as StatusInterface;
+        });
 
         return response.status(200).json(todoList);
     }
