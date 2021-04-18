@@ -4,6 +4,7 @@ import ListAllTodoListService from '../services/ListAllTodoListService';
 import ShowTodoListService from '../services/ShowTodoListService';
 import StatusInterface from '../../../status';
 import UpdateTodoListService from '../services/UpdateTodoListService';
+import DeleteTodoListService from '../services/DeleteTodoListService';
 
 class TodoListController {
 
@@ -50,6 +51,15 @@ class TodoListController {
         }) as StatusInterface;
 
         return response.status(todoList.statusCode ? todoList.statusCode : 200).json(todoList);
+    }
+
+    public async delete(request: Request, response: Response): Promise<Object> {
+
+        const deleteTodoListService = new DeleteTodoListService();
+
+        const todoList = await deleteTodoListService.execute(request.params.id) as StatusInterface;
+
+        return response.status(todoList.statusCode).json(todoList);
     }
 }
 

@@ -26,7 +26,7 @@ class TodoListRepository {
         return findTodoList[0];
     }
 
-    public async saveById({id, title, completed}: EntityTodoListInterface): Promise<Object | undefined> {
+    public async saveById({id, title, completed}: EntityTodoListInterface): Promise<Object> {
 
         const findTodoListIndex = todoList.findIndex(todo => todo.id == id);
 
@@ -39,6 +39,13 @@ class TodoListRepository {
         todoList[findTodoListIndex] = saveByIdTodoList;
 
         return saveByIdTodoList;
+    }
+
+    public async deleteById(id: string): Promise<void> {
+
+        const deleteTodoListIndex = todoList.findIndex(todo => todo.id == id);
+
+        todoList.splice(deleteTodoListIndex, 1);
     }
 }
 

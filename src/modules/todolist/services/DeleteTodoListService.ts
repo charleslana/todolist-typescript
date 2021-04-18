@@ -1,9 +1,8 @@
-import EntityTodoListInterface from '../interfaces/EntityTodoListInterface';
 import TodoListRepository from '../repositories/TodoListRepository';
 
-class UpdateTodoListService {
+class DeleteTodoListService {
 
-    public async execute({id, title, completed}: EntityTodoListInterface): Promise<Object> {
+    public async execute(id: string): Promise<Object> {
 
         const todoListRepository = new TodoListRepository();
         const todoList = await todoListRepository.findById(id);
@@ -16,12 +15,14 @@ class UpdateTodoListService {
             }
         }
 
-        return await todoListRepository.saveById({
-            id,
-            title,
-            completed
-        });
+        await todoListRepository.deleteById(id);
+
+        return {
+            statusCode: 200,
+            status: 'success',
+            message: 'Todo list deleted successfully.'
+        }
     }
 }
 
-export default UpdateTodoListService;
+export default DeleteTodoListService;
