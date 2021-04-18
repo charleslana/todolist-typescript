@@ -5,6 +5,7 @@ import ShowTodoListService from '../services/ShowTodoListService';
 import StatusInterface from '../../../status';
 import UpdateTodoListService from '../services/UpdateTodoListService';
 import DeleteTodoListService from '../services/DeleteTodoListService';
+import CompletedTodoListService from '../services/CompletedTodoListService';
 
 class TodoListController {
 
@@ -60,6 +61,20 @@ class TodoListController {
         const todoList = await deleteTodoListService.execute(request.params.id) as StatusInterface;
 
         return response.status(todoList.statusCode).json(todoList);
+    }
+
+    public async patch(request: Request, response: Response): Promise<Object> {
+
+        const completedTodoListService = new CompletedTodoListService();
+
+        const enable = request.query.enable === 'true';
+
+        const todoList = await completedTodoListService.execute({
+            id: request.params.id,
+            completed: enable
+        }) as StatusInterface;
+
+        return response.status(todoList.statusCode ? todoList.statusCode : 200).json(todoList);
     }
 }
 
