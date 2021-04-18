@@ -1,8 +1,9 @@
 import {Request, Response} from 'express';
 import CreateTodoListService from '../services/CreateTodoListService';
 import ListAllTodoListService from '../services/ListAllTodoListService';
-import ShowTodoList from '../services/ShowTodoList';
+import ShowTodoListService from '../services/ShowTodoListService';
 import StatusInterface from '../../../status';
+import UpdateTodoListService from '../services/UpdateTodoListService';
 
 class TodoListController {
 
@@ -20,9 +21,9 @@ class TodoListController {
 
     public async list(request: Request, response: Response): Promise<Object> {
 
-        const listAllTodoList = new ListAllTodoListService();
+        const listAllTodoListService = new ListAllTodoListService();
 
-        const todoList = await listAllTodoList.execute();
+        const todoList = await listAllTodoListService.execute();
 
         return response.status(200).json({
             todoList
@@ -31,9 +32,22 @@ class TodoListController {
 
     public async show(request: Request, response: Response): Promise<Object> {
 
-        const showTodoList = new ShowTodoList();
+        const showTodoListService = new ShowTodoListService();
 
-        const todoList = await showTodoList.execute(request.params.id) as StatusInterface;
+        const todoList = await showTodoListService.execute(request.params.id) as StatusInterface;
+
+        return response.status(todoList.statusCode ? todoList.statusCode : 200).json(todoList);
+    }
+
+    public async update(request: Request, response: Response): Promise<Object> {
+
+        const updateTodoListService = new UpdateTodoListService();
+
+        const todoList = await updateTodoListService.execute({
+            id: request.body.id,
+            title: request.body.title,
+            completed: request.body.completed
+        }) as StatusInterface;
 
         return response.status(todoList.statusCode ? todoList.statusCode : 200).json(todoList);
     }

@@ -1,6 +1,6 @@
 import TodoListRepository from '../repositories/TodoListRepository';
 
-class ShowTodoList {
+class ShowTodoListService {
 
     public async execute(id: string): Promise<Object | undefined> {
 
@@ -19,4 +19,4 @@ class ShowTodoList {
     }
 }
 
-export default ShowTodoList;
+export default ShowTodoListService;
