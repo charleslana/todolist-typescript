@@ -2,11 +2,13 @@ import express, {NextFunction, Request, Response} from 'express';
 import 'express-async-errors';
 import routes from './routes';
 import AppError from './error/AppError';
+import cors from 'cors';
 
 const port = 8081;
 const hostname = 'localhost';
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(routes);
 
