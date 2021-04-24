@@ -22,13 +22,13 @@ class TodoListRepository {
 
     public async findById(id: string): Promise<Object | undefined> {
 
-        const findTodoList = todoList.filter(todo => todo.id.includes(id));
+        const findTodoList = todoList.filter(todo => todo.id === id);
         return findTodoList[0];
     }
 
     public async saveById({id, title, completed}: EntityTodoListInterface): Promise<Object> {
 
-        const findTodoListIndex = todoList.findIndex(todo => todo.id == id);
+        const findTodoListIndex = todoList.findIndex(todo => todo.id === id);
 
         const saveByIdTodoList = {
             id,
@@ -43,7 +43,7 @@ class TodoListRepository {
 
     public async deleteById(id: string): Promise<void> {
 
-        const deleteTodoListIndex = todoList.findIndex(todo => todo.id == id);
+        const deleteTodoListIndex = todoList.findIndex(todo => todo.id === id);
 
         todoList.splice(deleteTodoListIndex, 1);
     }
